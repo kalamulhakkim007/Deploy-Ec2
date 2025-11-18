@@ -14,9 +14,9 @@ jobs:
       - name: Login to Docker Hub
         uses: docker login -u ${{ secrets.USERNAME }} -p ${{ secrets.PASSWORD }}
       - name: Build Docker Image
-        run: docker build -t nest-crud-app .
+        run: docker build -t kalamulhakkim007/Deploy-Ec2 .
       - name: Publish image to Docker Hub
-        run: docker push nest-crud-app:latest
+        run: docker push kalamulhakkim007/Deploy-Ec2:latest
 
 
   deploy:
@@ -24,8 +24,8 @@ jobs:
     runs-on: aws-ec2       
     steps: 
       - name: Pull image from docker hub
-        run: docker pull nest-crud-app:latest
+        run: docker pull kalamulhakkim007/Deploy-Ec2:latest
       - name: Delete Old Container
         run: docker rm -f reactContainer
       - name: Run docker container    
-        run: docker run -d -p 3000:80 --name reactContainer  nest-crud-app
+        run: docker run -d -p 3000:80 --name reactContainer  kalamulhakkim007/Deploy-Ec2
